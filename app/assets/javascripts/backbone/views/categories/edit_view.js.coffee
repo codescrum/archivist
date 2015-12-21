@@ -1,19 +1,19 @@
-Archivist.Views.Categories ||= {}
+Archivist.Views.CodeLists ||= {}
 
-class Archivist.Views.Categories.EditView extends Backbone.View
-  template: JST["backbone/templates/categories/edit"]
+class Archivist.Views.CodeLists.EditView extends Backbone.View
+  template: JST["backbone/templates/code_lists/edit"]
 
   events:
-    "submit #edit-category": "update"
+    "submit #edit-code_list": "update"
 
   update: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
     @model.save(null,
-      success: (category) =>
-        @model = category
-        window.location.hash = "/#{@model.id}"
+      success: (code_list) =>
+        @model = code_list
+        Backbone.history.navigate(@model.url(), true)
     )
 
   render: ->

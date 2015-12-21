@@ -1,10 +1,10 @@
-Archivist.Views.CodeLists ||= {}
+Archivist.Views.Categories ||= {}
 
-class Archivist.Views.CodeLists.NewView extends Backbone.View
-  template: JST["backbone/templates/code_lists/new"]
+class Archivist.Views.Categories.NewView extends Backbone.View
+  template: JST["backbone/templates/categories/new"]
 
   events:
-    "submit #new-code_list": "save"
+    "submit #new-category": "save"
 
   constructor: (options) ->
     super(options)
@@ -21,11 +21,11 @@ class Archivist.Views.CodeLists.NewView extends Backbone.View
     @model.unset("errors")
 
     @collection.create(@model.toJSON(),
-      success: (code_list) =>
-        @model = code_list
+      success: (category) =>
+        @model = category
         window.location.hash = "/#{@model.id}"
 
-      error: (code_list, jqXHR) =>
+      error: (category, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
 

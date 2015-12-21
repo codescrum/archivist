@@ -1,31 +1,42 @@
-class Archivist.Routers.CategoriesRouter extends Backbone.Router
+class Archivist.Routers.CategoriesRouter extends Backbone.SubRoute
   initialize: (options) ->
-    @categories = new Archivist.Collections.CategoriesCollection()
-    @categories.reset options.categories
+    @categoriesFetched = new $.Deferred
+    @categories = options.categories
+    that = this
+    @categories.fetch reset: true, success: ->
+      that.categoriesFetched.resolve()
 
   routes:
-    "new"      : "newCategory"
-    "index"    : "index"
-    ":id/edit" : "edit"
-    ":id"      : "show"
-    ".*"        : "index"
+    "new"      : "new_category"
+    "index"    : "categories_index"
+    ":id/edit" : "category_edit"
+    ":id"      : "category_show"
+    ".*"        : "categories_index"
+    ""          : "categories_index"
 
-  newCategory: ->
-    @view = new Archivist.Views.Categories.NewView(collection: @categories)
-    $("#categories").html(@view.render().el)
+  new_category: ->
+    that = this
+    @categoriesFetched.done ->
+      that.view = new Archivist.Views.Categories.NewView(collection: that.categories)
+      Archivist.UI.html(that.view.render().el)
 
-  index: ->
-    @view = new Archivist.Views.Categories.IndexView(collection: @categories)
-    $("#categories").html(@view.render().el)
+  categories_index: ->
+    that = this
+    @categoriesFetched.done ->
+      that.view = new Archivist.Views.Categories.IndexView(collection: that.categories)
+      Archivist.UI.html(that.view.render().el)
 
-  show: (id) ->
-    category = @categories.get(id)
+  category_show: (instrument_id, id) ->
+    that = this
+    @categoriesFetched.done ->
+      category = that.categories.get(id)
+      that.view = new Archivist.Views.Categories.ShowView(model: category)
+      Archivist.UI.html(that.view.render().el)
 
-    @view = new Archivist.Views.Categories.ShowView(model: category)
-    $("#categories").html(@view.render().el)
+  category_edit: (instrument_id, id) ->
+    that = this
+    @categoriesFetched.done ->
+      category = that.category.get(id)
 
-  edit: (id) ->
-    category = @categories.get(id)
-
-    @view = new Archivist.Views.Categories.EditView(model: category)
-    $("#categories").html(@view.render().el)
+      that.view = new Archivist.Views.Categories.EditView(model: category)
+      Archivist.UI.html(that.view.render().el)

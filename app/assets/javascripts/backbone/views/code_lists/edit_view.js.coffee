@@ -13,7 +13,7 @@ class Archivist.Views.CodeLists.EditView extends Backbone.View
     @model.save(null,
       success: (code_list) =>
         @model = code_list
-        window.location.hash = "/#{@model.id}"
+        Backbone.history.navigate(@model.url(), true)
     )
 
   render: ->

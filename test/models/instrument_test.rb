@@ -15,22 +15,27 @@ class InstrumentTest < ActiveSupport::TestCase
   
   test "has many loops" do
     assert_kind_of ActiveRecord::Associations::CollectionProxy, @instrument.cc_loops
+    assert_equal @instrument.cc_loops, @instrument.loops
   end
   
   test "has many conditions" do
     assert_kind_of ActiveRecord::Associations::CollectionProxy, @instrument.cc_conditions
+    assert_equal @instrument.cc_conditions, @instrument.conditions
   end
   
   test "has many sequences" do
     assert_kind_of ActiveRecord::Associations::CollectionProxy, @instrument.cc_sequences
+    assert_equal @instrument.cc_sequences, @instrument.sequences
   end
   
   test "has many statements" do
     assert_kind_of ActiveRecord::Associations::CollectionProxy, @instrument.cc_statements
+    assert_equal @instrument.cc_statements, @instrument.statements
   end
   
   test "has many questions" do
     assert_kind_of ActiveRecord::Associations::CollectionProxy, @instrument.cc_questions
+    assert_equal @instrument.cc_questions, @instrument.questions
   end
   
   test "has many instructions" do

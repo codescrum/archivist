@@ -1,4 +1,4 @@
-class Archivist.Models.Category extends Backbone.Model
+class Archivist.Models.Category extends Backbone.RelationalModel
   paramRoot: 'category'
 
   defaults:

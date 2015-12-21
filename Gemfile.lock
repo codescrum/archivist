@@ -37,6 +37,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    backbone-relational-rails (0.10.0)
+      railties (>= 3.1)
+    backbone-subroute-rails (0.4.6)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -134,6 +137,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    rb-readline (0.5.3)
     rdoc (4.2.0)
     redis (3.2.2)
     responders (2.1.0)
@@ -162,8 +166,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -181,6 +183,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  backbone-relational-rails
+  backbone-subroute-rails
   byebug
   coffee-rails (~> 4.1.0)
   devise
@@ -188,6 +192,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  nokogiri
   pg
   puma
   pundit
@@ -196,12 +201,12 @@ DEPENDENCIES
   rails-erd
   rails-perftest
   rails_12factor
+  rb-readline
   redis
   ruby-prof
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple-navigation
   spring
-  turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)

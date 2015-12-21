@@ -1,3 +1,16 @@
-<h2>Welcome to Archivist</h2>
+<div id="backbone-UI"></div>
 
-<p>Mapper + CADDIES</p>
+<script type="text/javascript">
+  $(function() {
+    window.router = new Archivist.Routers.AppRouter();
+    Backbone.history.start({pushState: true});
+    $(document).on('click', 'a:not([data-bypass])', function(e) {
+      var href = $(this).attr('href');
+      if (href) {
+        e.preventDefault();
+	Backbone.history.navigate(href, true);
+      }      
+      });
+    Archivist.UI = $('#backbone-UI');
+  });
+</script>

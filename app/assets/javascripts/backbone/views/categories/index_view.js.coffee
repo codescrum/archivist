@@ -1,7 +1,7 @@
-Archivist.Views.Categories ||= {}
+Archivist.Views.CodeLists ||= {}
 
-class Archivist.Views.Categories.IndexView extends Backbone.View
-  template: JST["backbone/templates/categories/index"]
+class Archivist.Views.CodeLists.IndexView extends Backbone.View
+  template: JST["backbone/templates/code_lists/index"]
 
   initialize: () ->
     @collection.bind('reset', @addAll)
@@ -9,12 +9,12 @@ class Archivist.Views.Categories.IndexView extends Backbone.View
   addAll: () =>
     @collection.each(@addOne)
 
-  addOne: (category) =>
-    view = new Archivist.Views.Categories.CategoryView({model : category})
+  addOne: (codeList) =>
+    view = new Archivist.Views.CodeLists.CodeListView({model : codeList})
     @$("tbody").append(view.render().el)
 
   render: =>
-    @$el.html(@template(categories: @collection.toJSON() ))
+    @$el.html(@template(codeLists: @collection.toJSON() ))
     @addAll()
 
     return this
