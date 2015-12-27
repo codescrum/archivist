@@ -1,10 +1,20 @@
 class CodeListsController < ApplicationController
-  before_action :set_code_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_code_list, only: [:show, :edit, :update, :destroy, :show_compiled]
+  before_action :set_instrument, only: [:index, :new, :create, :compiled]
+
+  # GET /code_lists/1/compiled.json
+  def show_compiled
+  end
+  
+  # GET /instruments/1/code_lists/compiled.json
+  def compiled
+    @code_lists = @instrument.code_lists
+  end
 
   # GET /code_lists
   # GET /code_lists.json
   def index
-    @code_lists = CodeList.all
+    @code_lists = @instrument.code_lists
   end
 
   # GET /code_lists/1
@@ -14,7 +24,7 @@ class CodeListsController < ApplicationController
 
   # GET /code_lists/new
   def new
-    @code_list = CodeList.new
+    @code_list = @instrument.code_lists.new
   end
 
   # GET /code_lists/1/edit
@@ -24,7 +34,7 @@ class CodeListsController < ApplicationController
   # POST /code_lists
   # POST /code_lists.json
   def create
-    @code_list = CodeList.new(code_list_params)
+    @code_list = @instrument.code_lists.new(code_list_params)
 
     respond_to do |format|
       if @code_list.save
@@ -65,6 +75,10 @@ class CodeListsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_code_list
       @code_list = CodeList.find(params[:id])
+    end
+
+    def set_instrument
+      @instrument = Instrument.find(params[:instrument_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

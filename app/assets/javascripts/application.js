@@ -17,6 +17,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone.subroute
-//= require backbone-relational
+//= require backbone.marionette
 //= require backbone/archivist
 //= require_tree .

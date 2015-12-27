@@ -54,7 +54,7 @@ gem "simple-navigation"
 gem "jquery-ui-rails"
 gem "rails-backbone"
 gem "backbone-subroute-rails"
-gem 'backbone-relational-rails'
+gem "marionette-rails"
 gem "nokogiri"
 
 group :development, :test do

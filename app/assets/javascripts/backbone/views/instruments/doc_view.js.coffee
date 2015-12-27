@@ -9,9 +9,9 @@ class Archivist.Views.Instruments.DocView extends Backbone.View
     @codeListsFetched = new $.Deferred
     @code_lists = @model.code_lists
     that = this
-    #@code_lists.fetch reset: true, success: ->
-      #that.codeListsFetched.resolve()
-    #@codeListsFetched.done ->
-    that.code_lists_view = new Archivist.Views.CodeLists.IndexView(collection: that.code_lists)
-    that.$('#code-lists').html(that.code_lists_view.render().el)
+    @code_lists.fetch reset: true, success: ->
+      that.codeListsFetched.resolve()
+    @codeListsFetched.done ->
+      that.code_lists_view = new Archivist.Views.CodeLists.IndexView(collection: that.code_lists)
+      that.$('#code-lists').html(that.code_lists_view.render().el)
     return this

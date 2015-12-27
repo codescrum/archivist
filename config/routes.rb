@@ -6,7 +6,14 @@ Rails.application.routes.draw do
   end
   resources :instruments, shallow: true, constraints: -> (r){ (r.format == :json) } do 
     resources :instructions
-    resources :code_lists
+    resources :code_lists do 
+      member do
+        get :compiled, to: 'code_lists#show_compiled'
+      end
+      collection do
+        get :compiled
+      end
+    end
     resources :cc_questions
     resources :cc_sequences
     resources :cc_statements

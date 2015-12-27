@@ -1,6 +1,6 @@
 class CodeList < ActiveRecord::Base
   belongs_to :instrument
-  has_many :codes, dependent: :destroy
+  has_many :codes, -> { includes(:category).order('"order" ASC') }, dependent: :destroy
   has_many :categories, through: :codes
   has_one :response_domain_code, dependent: :destroy
 
@@ -17,4 +17,9 @@ class CodeList < ActiveRecord::Base
       self.response_domain_code.destroy
     end
   end
+  
+  def is_response_domain?
+    not self.response_domain_code.nil?
+  end
+  alias has_response_domain? is_response_domain?
 end
